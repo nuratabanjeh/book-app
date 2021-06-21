@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './header';
-import IsLoadingAndError from './IsLoadingAndError';
+// import IsLoadingAndError from './IsLoadingAndError';
 import Footer from './footer';
 import {withAuth0} from "@auth0/auth0-react";
 import {
@@ -8,7 +8,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import MyFavoriteBooks from './MyFavoriteBooks';
+import MyFavoriteBooks from './myFavoriteBooks';
 import Login from './Login';
 
 import Profile from './components/Profile';
@@ -43,7 +43,7 @@ class App extends React.Component {
           {/* </IsLoadingAndError> */}
         </Router>
       </>
-    )
+    );
   }
 }
 
