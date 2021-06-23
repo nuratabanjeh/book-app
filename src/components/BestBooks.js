@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import axios from 'axios';
 import { withAuth0 } from '@auth0/auth0-react';
@@ -8,13 +10,12 @@ class BestBooks extends React.Component {
     books: [],
   };
   componentDidMount = async () => {
-    const books = await axios.get(process.env.REACT_APP_SERVER, {
-      params: { userEmail: this.props.auth0.user.email },
+    const books = await axios.get("http://localhost:3001/books", {
+      params: { email: this.props.auth0.user.email },
     });
-    
+    console.log("🚀 ~ file: BestBooks.js ~ line 16 ~ BestBooks ~ componentDidMount= ~  books",  books)
     this.setState({
       books: books.data,
-      
     });
   };
   render() {
@@ -34,42 +35,3 @@ class BestBooks extends React.Component {
   }
 }
 export default withAuth0(BestBooks);
-
-
-
-
-
-// import React from 'react';
-// import axios from 'axios';
-// import { withAuth0 } from '@auth0/auth0-react';
-// import Card from 'react-bootstrap/Card';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// class BestBooks extends React.Component {
-//   state = {
-//     books: [],
-//   };
-//   componentDidMount = async () => {
-//     const books = await axios.get(process.env.REACT_APP_SERVER, {
-//       params: { userEmail: this.props.auth0.user.userEmail },
-//     });
-//     this.setState({
-//       books: books.data,
-//     });
-//   };
-//   render() {
-//     return this.state.books.map((item) => {
-//       return (
-//         <>
-//           <Card style={{ width: '18rem' }}>
-//             <Card.Img variant="top" src={item.img} />
-//             <Card.Body>
-//               <Card.Title>{item.name}</Card.Title>
-//               <Card.Text>{item.desc}</Card.Text>
-//             </Card.Body>
-//           </Card>
-//         </>
-//       );
-//     });
-//   }
-// }
-// export default withAuth0(BestBooks);
