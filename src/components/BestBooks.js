@@ -1,24 +1,65 @@
 import React from 'react';
-import {Card,Button} from 'react-bootstrap';
+import {Card,Button, Container, Row, Col} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 class BestBooks extends React.Component {
 
-
-
   render() {
-    return this.props.books.map((item, index) => {
-      return (
-        <Card style={{ width: '18rem' }} key={index}>
-          <Card.Img variant="top" src={item.image} />
-          <Card.Body>
-            <Card.Title>{item.bookName}</Card.Title>
-            <Card.Text>{item.describtion}</Card.Text>
-            <Button onClick={()=>this.props.deleteBook(item._id)} variant="danger">Delete</Button>
-          </Card.Body>
-        </Card>
-      );
-    });
+    return (
+      <Container>
+        <Row>
+          {this.props.books.map((item, bookId) => {
+            return (
+              <Col sm={6} lg={4} key={bookId}>
+                <Card style={{ width: '18rem' }}>
+                  <Card.Img variant="top" src={item.image} />
+                  <Card.Body>
+                    <Card.Title>{item.bookName}</Card.Title>
+                    <Card.Text>{item.describtion}</Card.Text>
+                    <Button
+                      onClick={() => this.props.deleteBook(bookId)}
+                      variant="danger"
+                    >
+                      Delete
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        this.props.updateBook(
+                         bookId,
+                          item.bookName,
+                          item.describtion,
+                          item.image
+                        );
+                        this.props.handleShowUpdate();
+                      }}
+                      variant="primary"
+                    >
+                      Update
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            );
+          })}
+        </Row>
+      </Container>
+    );
   }
+
+
+  // render() {
+  //   return this.props.books.map((item, index) => {
+  //     return (
+  //       <Card style={{ width: '18rem' }} key={index}>
+  //         <Card.Img variant="top" src={item.image} />
+  //         <Card.Body>
+  //           <Card.Title>{item.bookName}</Card.Title>
+  //           <Card.Text>{item.describtion}</Card.Text>
+  //           <Button onClick={()=>this.props.deleteBook(item._id)} variant="danger">Delete</Button>
+  //         </Card.Body>
+  //       </Card>
+  //     );
+  //   });
+  // }
 }
 export default BestBooks;
 
